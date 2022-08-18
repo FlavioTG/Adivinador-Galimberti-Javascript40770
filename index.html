@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!---html es la etiqueta que definelel doc en el que voy a trabajar-->
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>SIMULADOR INTERACTIVO Comisión 40770 Galimberti</title>
+	<link href="css/index.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+</head>
+
+<body>
+	<div class="gameTitle">
+		<h1>
+			ADIVINE EL NUMERO
+		</h1>
+	</div>
+
+	<div class="container">
+		<div id="configuration">
+			<h2>
+				Configuración
+			</h2>
+			<div id="slotminNum">
+				<ul class="text">Ingrese el rango inferior del número a adivinar</ul>
+				<input type="number" id="numMinimo">
+				<span id="minNumstate">0 </span>
+			</div>
+			<div id="slotmaxNum">
+				<ul class="text">Ingrese el rango superior del número a adivinar</ul>
+				<input type="number" id="numMaximo">
+				<span id="maxNumstate"> 0</span>
+			</div>
+			<div id="slotchances">
+				<ul class="text">Ingrese la cantidad de chances</ul>
+				<input type="number" id="numChances">
+				<span id="numch"> 0</span>
+			</div>
+			<button id="Config" type="button">Save Config </button>
+		</div>
+		<div id="juego" class="juego">
+			<h2>
+				Juego
+			</h2>
+			<div id="numIn">
+				<ul class="text">Ingrese el numero a adivinar</ul>
+				<input type="number" id="numInput" >
+				<button id="aceptar" type="button">Aceptar</button>
+				<div>
+					<ul id="intentosReal"></ul>
+					<ul id="intentosNum"></ul>
+					<ul id="mensajeAdv"></ul>
+				</div>
+			</div>
+
+
+		</div>
+
+	</div>
+	<script src="js/simulator.js"></script>
+</body>
