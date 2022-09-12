@@ -8,10 +8,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>SIMULADOR INTERACTIVO Comisión 40770 Galimberti</title>
 	<link href="css/index.css" rel="stylesheet" />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
+
 	<div class="gameTitle">
 		<h1>
 			ADIVINE EL NUMERO
@@ -26,35 +27,29 @@
 			<div id="slotminNum">
 				<ul class="text">Ingrese el rango inferior del número a adivinar</ul>
 				<input type="number" id="numMinimo">
-				<span id="minNumstate">0 </span>
+				<span id="minNumstate"> </span>
 			</div>
 			<div id="slotmaxNum">
 				<ul class="text">Ingrese el rango superior del número a adivinar</ul>
 				<input type="number" id="numMaximo">
-				<span id="maxNumstate"> 0</span>
+				<span id="maxNumstate"> </span>
 			</div>
 			<div id="slotchances">
-				<ul class="text">Ingrese la cantidad de chances</ul>
+				<ul class="text">Ingrese la cantidad de intentos (minimo 2)</ul>
 				<input type="number" id="numChances">
-				<span id="numch"> 0</span>
+				<span id="numch"> </span>
 			</div>
-			<button id="Config" type="button">Save Config </button>
+			<button id="config" type="button">Save Config </button>
 		</div>
 		<div id="juego" class="juego">
-			<h2>
-				Juego
-			</h2>
-			<div id="numIn">
-				<ul class="text">Ingrese el numero a adivinar</ul>
-				<input type="number" id="numInput" >
-				<button id="aceptar" type="button">Aceptar</button>
-				<div>
-					<ul id="intentosReal"></ul>
-					<ul id="intentosNum"></ul>
-					<ul id="mensajeAdv"></ul>
-				</div>
+			<ul class="text">Ingrese el numero a adivinar</ul>
+			<input type="number" id="numInput">
+			<button id="aceptar" type="button">Aceptar</button>
+			<div>
+				<ul id="intentosReal"></ul>
+				<ul id="intentosNum"></ul>
+				<ul id="mensajeAdv"></ul>
 			</div>
-
 
 		</div>
 

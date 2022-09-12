@@ -15,11 +15,15 @@ var MAXI = 0;
 var INTENTI = 0;
 var intentos = 0;
 class Config {
-	constructor(min, max, chance, numadiv) {
+	constructor(nombre,min, max, chance, numadiv) {
+		this.nombre = nombre;
 		this.min = parseInt(min);
 		this.max = parseInt(max);
 		this.chance = parseInt(chance);
 		this.numadiv = parseInt(numadiv);
+	}
+	configNombre() { 
+		return this.nombre;
 	}
 	configMinimo() {
 		return this.min;
@@ -54,24 +58,33 @@ const valuemaximo = document.getElementById('maxNumstate');
 const valueminimo = document.getElementById('minNumstate');
 const valuechances = document.getElementById('numch');
 //Defino la funcion settings en la cual configuro el rango de valores y la cantidad de chances
-
+const root = document.getElementById('configuration')
 /// */
 //***************** */
 
 const Aceptar = document.getElementById('aceptar')
-Aceptar.addEventListener('click', () => {
-	adivinator()
-	// updateResources()
-})
+const configButton = document.getElementById('config')
+function clearUIConfig() {
+	//Limpia la pantalla o el contenido del div
+	root.innerHTML = "";
+}
 
-const configButton = document.getElementById('Config')
+const game = document.getElementById('juego')
+function clearUIJuego() {
+	//Limpia la pantalla o el contenido del div
+	game.innerHTML = "";
+}
+
+let resourcesJson = JSON.parse(localStorage.getItem("resourcesJson")) ?? [];
 configButton.addEventListener('click', () => {
 	setting()
 	//saveToLocalStorage()
 	// updateResources()
 })
-let resourcesJson = JSON.parse(localStorage.getItem("resourcesJson")) ?? [];
-
+Aceptar.addEventListener('click', () => {
+	adivinator()
+	// updateResources()
+})
 
 
 
@@ -84,7 +97,30 @@ function listarIntentosRealizados() {
 		document.write(p.intento);
 	});
 }
+/***/
+function renderJuegoScreen() {
+	let div = document.createElement('div');
+	/*let ul =   document.createElement('ul');
+	let input =   document.createElement('input');
+	let button =   document.createElement('button');
+	button.id= "aceptar";
+	button.type = "button";
+	button.innerText = "aceptar";
+	input.type= "number";
+	input.id = "numInput";
+	ul.id = 'text';
+	ul.innerText = "Ingrese el numero a adivinar";*/
+	div.id = 'juego';
+	div.className = 'juego';
+	div.innerHTML += ' <ul class="text">Ingrese el numero a adivinar</ul>'
+	div.innerHTML += '<input type="number" id="numInput">'
+	div.innerHTML += '<button id="aceptar" type="button">Aceptar</button>'
+	div.innerHTML += '<div><ul id="intentosReal"></ul><ul id="intentosNum"></ul><ul id="mensajeAdv"></ul></div>'
 
+	document.body.appendChild(div);
+	//agrego un mensaje
+}
+//*******/
 
 
 function setting() {
@@ -93,10 +129,9 @@ function setting() {
 	let maximoIN = parseInt(document.getElementById("numMaximo").value);
 	let intentosIN = parseInt(document.getElementById("numChances").value);
 
-
-	if (!isNaN(minimoIN) && minimoIN >= 0) {
+	if (!isNaN(maximoIN) && minimoIN >= 0) {
 		if (!isNaN(maximoIN) && maximoIN > minimoIN) {
-			if (!isNaN(intentosIN) && intentosIN > 0) {
+			if (!isNaN(intentosIN) && intentosIN > 2) {
 				text = "Correcto";
 				document.getElementById("numch").innerHTML = text;
 				NumeroAdivinar = numeroaleatorio(minimoIN, maximoIN); //Genero numero Aleatorio
@@ -105,8 +140,7 @@ function setting() {
 
 				resourcesJson.push(Configuration)
 				localStorage.setItem("resourcesJson", JSON.stringify(resourcesJson));
-
-				console.log("Exitos");
+				console.log("Exitos");				
 				MINI = minimoIN;
 				MAXI = maximoIN;
 				INTENTI = intentosIN;
@@ -114,51 +148,38 @@ function setting() {
 				clearUIConfig()
 			}
 			else {
-				//text = "No intentos";
-				//valuechances.innerText = text;
+				swal("Ingrese un numero de intentos válido", "mayor a 2", "error");
 				console.log("no valido intentos");
 			}
 		}
 		else {
-			text = "No Valido";
-			valuemaximo.innerText = text;
+			swal("Ingrese un numero máximo válido", "mayor al mínimo", "error");
 			console.log("maximo< minimo");
 		}
 	}
 	else {
-		text = "No Valido";
-		valueminimo.innerText = text;
+		swal("Ingrese un numero mínimo válido", "mayor a cero", "error");
 		console.log("minimo <0");
 	}
 }
 
 function numeroaleatorio(minimo, maximo) {
-
 	return Math.floor(Math.random() * (maximo - minimo) + minimo);
 }
 
-const numIn = document.getElementById("numIn");
+const numIn = document.getElementById("juego");
 function adivinator() {
-	//console.log("ADIVINIATOR FUNCTION");
 	let numInput = parseInt(document.getElementById("numInput").value);
-
-	//	const mensajeAdv = document.getElementById("mensajeAdv");
-	//	const intentosNum = document.getElementById("numState");
-
-
 	const intentosReal = document.getElementById("intentosReal");
-	intentosReal.innerHTML = "HOLA";
+	intentosReal.innerHTML = "";
 	const intentosNum = document.getElementById("intentosNum");
-	intentosNum.innerHTML = "PATP";
+	intentosNum.innerHTML = "";
 	const mensajeAdv = document.getElementById("mensajeAdv");
-	mensajeAdv.innerHTML = "BULLRICH";
+	mensajeAdv.innerHTML = "";
 
-	//do {
-	//numeroIngresado = prompt("Ingrese un numero ");
-	//numInput = parseInt(numInput);
 	intentos++;
 	arrintentos.push(new Intentos(numInput, intentos));
-	console.log(numInput,intentos)
+	console.log(numInput, intentos)
 	if (numInput < NumeroAdivinar) {
 		console.log("El numero secreto es más alto que " + numInput);
 		mensajeAdv.innerHTML =
@@ -196,7 +217,7 @@ function adivinator() {
 
 	if (INTENTI != intentos) {
 		if (numInput == NumeroAdivinar) {
-			numIn.innerText ="";
+			numIn.innerText = "";
 			//alert("Felicitaciones adivinaste el numero " + arrintentos[intentos-1].numintentos() +" en "+);
 			mensajeAdv.innerHTML =
 				`FELICITACIONES ADIVINASTE EL NUMERO EN  ` +
@@ -206,17 +227,21 @@ function adivinator() {
 				`Intento : ` + arrintentos[intentos - 1].cantintentos();
 			intentosNum.innerHTML =
 				`Ultimo Numero: ` + arrintentos[intentos - 1].numintentos();
-			
+			swal("Felicitaciones!!", `FELICITACIONES ADIVINASTE EL NUMERO EN  ` +
+				arrintentos[intentos - 1].cantintentos() +
+				` INTENTOS`, "success");
 		}
 	} else {
-		numIn.innerText ="";
+		clearUIJuego();
 		mensajeAdv.innerHTML =
 			`Te quedaste sin intentos, mejor suerte la proxima. El numero era = ` +
-			Configuration.configNumAdiv;
+			NumeroAdivinar;
 		//alert("Te quedaste sin intentos, mejor suerte la proxima. El numero era = " + NumeroAdivinar )
 		intentosReal.innerHTML =
 			`Intento : ` + arrintentos[intentos - 1].cantintentos();
-			numIn.innerText ="";
+		numIn.innerText = "";
+		swal("Fallaste", `Te quedaste sin intentos, mejor suerte la proxima. El numero era = ` +
+			NumeroAdivinar, "error");
 		//.innerHTML = `Numero Secreto: ` + Configuration.configNumAdiv();
 	}
 	// while (INTENTI  != intentos);
@@ -229,29 +254,17 @@ function saveToLocalStorage() {
 }
 
 function updateResources() {
-	/*console.log(resources.coins, resources.diamons, resources.gold);
-	coinsLabel.innerText = resources.coins;
-	diamonsLabel.innerText = resources.diamons;
-	goldLabel.innerText = resources.gold;*/
-
 	saveToLocalStorage();
 }
-const root = document.getElementById('configuration')
-function clearUIConfig() {
-	//Limpia la pantalla o el contenido del div
-	root.innerHTML = "";
-}
-const game = document.getElementById('juego')
-function clearUIJuego() {
-	//Limpia la pantalla o el contenido del div
-	game.innerHTML = "";
-}
+
+
 function simulador() {
 	//alert("VAMOS A JUGAR UN SIMPLE JUEGO");
 	//alert("ADIVINAR EL NUMERO");
-	setting();
+	//setting();
 	//adivinator();
 	//listarIntentosRealizados();
+//	clearUIJuego();
 }
 
 simulador();

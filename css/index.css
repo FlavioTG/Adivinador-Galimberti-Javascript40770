@@ -8,18 +8,29 @@ body {
 	height: 100vh;
 }
 .gameTitle {
+	justify-content: center;
 	align-items: center;
 	background: black;
 	color: white;
 	display: flex;
 	align-content: center;
 }
-.container {
+.juego { 
+	color: white;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 80vh;
+	align-content: center;
+}
+.container {
+
+	color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
 }
 
 button {
