@@ -9,6 +9,7 @@
 	<title>SIMULADOR INTERACTIVO Comisión 40770 Galimberti</title>
 	<link href="css/index.css" rel="stylesheet" />
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!--<script src="./sweet-alert-offline-master/sweetalert2.all.min.js"></script>-->
 </head>
 
 <body>
@@ -17,13 +18,31 @@
 		<h1>
 			ADIVINE EL NUMERO
 		</h1>
+		<p>
+			El juego consiste simplemente de entre un rango definido
+			Adivinar el numero secreto (entre un rango predefinido)
+		</p>
 	</div>
 
 	<div class="container">
-		<div id="configuration">
+		<div id="level" class="level">
+			<h2>
+				Seleccione la dificultad
+			</h2>
+			<button id="buttFacil">Facil</button>
+			<button id="buttMedio">Medio</button>
+			<button id="buttDificil">Dificil</button>
+			<button id="buttPers">Personalizado</button>
+		</div>
+		<div id="configuration" class="configuration">
 			<h2>
 				Configuración
 			</h2>
+			<div id="slotNombre">
+				<ul class="nombreText">Ingrese el nombre del jugador</ul>
+				<input type="text" id="myName">
+				<span id="myname"> </span>
+			</div>
 			<div id="slotminNum">
 				<ul class="text">Ingrese el rango inferior del número a adivinar</ul>
 				<input type="number" id="numMinimo">
@@ -35,24 +54,25 @@
 				<span id="maxNumstate"> </span>
 			</div>
 			<div id="slotchances">
-				<ul class="text">Ingrese la cantidad de intentos (minimo 2)</ul>
+				<ul class="text">Ingrese la cantidad de intentos (mínimo 2)</ul>
 				<input type="number" id="numChances">
 				<span id="numch"> </span>
 			</div>
 			<button id="config" type="button">Save Config </button>
 		</div>
 		<div id="juego" class="juego">
-			<ul class="text">Ingrese el numero a adivinar</ul>
-			<input type="number" id="numInput">
-			<button id="aceptar" type="button">Aceptar</button>
-			<div>
-				<ul id="intentosReal"></ul>
-				<ul id="intentosNum"></ul>
-				<ul id="mensajeAdv"></ul>
+			<div id="slotAdiv">
+				<ul class="text">Ingrese el numero a adivinar</ul>
+				<input type="number" id="numInput">
+				<button id="aceptar" type="button">Aceptar</button>
 			</div>
-
+			<button id="returnButton" type="button">Volver a Inicio </button>
 		</div>
-
+		<div id="listarJugadores" class="listarJugadores">
+			<ul id="intentosReal"></ul>
+			<ul id="intentosNum"></ul>
+			<ul id="mensajeAdv"></ul>
+		</div>
 	</div>
 	<script src="js/simulator.js"></script>
 </body>

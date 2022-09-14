@@ -1,0 +1,23 @@
+[
+    {
+        "nivel": "Facil",
+        "min": 1,
+        "max": 10,
+        "chance": 10,
+        "numadiv": 1
+    },
+    {
+        "nivel": "Medio",
+        "min": 1,
+        "max": 20,
+        "chance": 7,
+        "numadiv": 9
+    },
+    {
+        "nivel": "Dificil",
+        "min": 1,
+        "max": 30,
+        "chance": 4,
+        "numadiv": 4
+    }
+]
