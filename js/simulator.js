@@ -98,9 +98,11 @@ function showUIJuego() {
 }
 function showUIConfig(option) {
 	const show = document.getElementById('configuration')
-	let minimoIN = document.getElementById("numMinimo")
-	let maximoIN = document.getElementById("numMaximo")
-	let intentosIN = document.getElementById("numChances")
+	let minimoIN = document.getElementById("numMinimo").value
+	let maximoIN = document.getElementById("numMaximo").value
+	let intentosIN = document.getElementById("numChances").value
+	INTENTI = intentosIN;
+	
 	show.style.display = "block";
 	show.style.visibility = "visible";
 	if (option) {
@@ -233,22 +235,10 @@ function listarIntentosRealizados() {
 		document.write(p.intento);
 	});
 }
-/***/
-function renderJuegoScreen() {
-	let div = document.createElement('div');
-	div.id = 'juego';
-	div.className = 'juego';
-	div.innerHTML += ' <ul class="text">Ingrese el numero a adivinar</ul>'
-	div.innerHTML += '<input type="number" id="numInput">'
-	div.innerHTML += '<button id="aceptar" type="button">Aceptar</button>'
-	div.innerHTML += '<div><ul id="intentosReal"></ul><ul id="intentosNum"></ul><ul id="mensajeAdv"></ul></div>'
-	document.body.appendChild(div);
-	//agrego un mensaje
-}
 
 function setting() {
 	clearUIJuego()
-	showUIConfig()
+	//showUIConfig()
 	let minimoIN = parseInt(document.getElementById("numMinimo").value);
 	let maximoIN = parseInt(document.getElementById("numMaximo").value);
 	let intentosIN = parseInt(document.getElementById("numChances").value);
@@ -267,6 +257,7 @@ function setting() {
 				MINI = minimoIN;
 				MAXI = maximoIN;
 				INTENTI = intentosIN;
+				
 				console.log(usuario, MINI, MAXI, INTENTI, NumeroAdivinar);
 				clearUIConfig()
 				showUIJuego()
